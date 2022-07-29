@@ -24,16 +24,19 @@ async function updateEnquete (req, res) {
   Enquete.updateE({
     id: req.body.id,
     titulo: req.body.titulo,
-    descricao: req.body.descricao,
     inicio: req.body.inicio,
     fim: req.body.fim
-  }).then(res.send('Atualizado !'))
+  }).then(
+    res.redirect('/')
+    // Resposta.updateR({
+
+    // })
+  )
 }
 async function EnqueteSelect (req, res) {
   var Einfo = await Enquete.selectE(req.params.id)
-  var Opcoes
   Einfo != ''
-    ? (Opcoes = res.send(await Resposta.SelectResp(Einfo[0].id)))
+    ? res.render('editar', {enquete: Einfo[0], respostas: await Resposta.SelectResp(Einfo[0].id)})
     : res.send('Não existe')
 }
 

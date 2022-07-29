@@ -13,8 +13,8 @@ async function get_all () {
     }else{
       dado.status = 'Status_EA'
     }
-    dado.dt_inicio = dado.dt_inicio.toLocaleDateString() + ' as ' + dado.dt_inicio.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) 
-    dado.dt_fim = dado.dt_fim.toLocaleDateString() + ' as ' + dado.dt_fim.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) 
+    dado.dt_inicio = dado.dt_inicio.split("-").reverse().join("/");
+    dado.dt_fim = dado.dt_fim.split("-").reverse().join("/")  
     
   })
   return await dados

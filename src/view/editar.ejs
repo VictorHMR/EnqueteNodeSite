@@ -3,42 +3,35 @@
     <body>
         <%- include("partials/navbar.ejs") %>
 
-            <form class="form-body" action="/cadastrar" method="post">
-                <h1>Registre uma Enquete</h1>
+            <form class="form-body" action="/edit/<%= enquete.id %>" method="post">
+                <h1>Editar</h1>
                 <section class="enquete-data">
+                    <input type="hidden" name="id">
                     <div>
                         <label for="title">Titulo</label>
                         <br>
-                        <input type="text" name="titulo" required>
+                        <input type="text" name="titulo" value="<%= enquete.titulo %>" required>
                     </div>
                     <div>
                         <label for="inicio">Data Inicial</label>
                         <br>
-                        <input type="date" name="inicio" required>
+                        <input type="date" name="inicio" value="<%= enquete.dt_inicio %>" required>
                     </div>
                     <div>
                         <label for="fim">Data Final</label>
                         <br>
-                        <input type="date" name="fim" required> 
+                        <input type="date" name="fim" value="<%= enquete.dt_fim %>" required> 
                     </div>
                 </section>
 
                 <section class="pergunta-data">
+                    <% respostas.forEach(resposta => { %>
                     <div>
-                        <label for="resposta">Resposta</label>
+                        <label for="resposta">Resposta </label>
                         <br>
-                        <input type="text" name="resposta" required>
+                        <input type="text" name="resposta" required value="<%= resposta.titulo %>">
                     </div>
-                    <div>
-                        <label for="resposta">Resposta</label>
-                        <br>
-                        <input type="text" name="resposta" required>
-                    </div>
-                    <div>
-                        <label for="resposta">Resposta</label>
-                        <br>
-                        <input type="text" name="resposta" required>
-                    </div>
+                    <% }) %>
                 </section>
 
                 <section class="button-box">

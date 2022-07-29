@@ -1,0 +1,6 @@
+.edit_icon{
+    width: 20px;
+    position: absolute;
+    margin-left: 40%;
+    z-index: 99;
+}

@@ -1,18 +1,29 @@
-<%- include("partials/head.ejs", {Screen: 'Enquetes'}); %>
-<body>
-<%- include("partials/navbar.ejs") %>    
+<%- include("partials/head.ejs", {Screen: 'Enquetes' }); %>
 
-<main class="Card-Box">
-    <% enquetes.forEach(e => { %>
+    <body>
+        <%- include("partials/navbar.ejs") %>
 
-        <a class="Card-E <%= e.status %>" href="/<%= e.id %>">
-            <h3><%= e.titulo %></h3> 
-            <p><span class="subtitle">Inicio:</span> <%= e.dt_inicio %></p>
-            <p><span class="subtitle">Fim:</span> <%= e.dt_fim %></p>
-        </a>
-    <% }) %>
-</main>
-</body>
+            <main class="Card-Box">
+                <% enquetes.forEach(e=> { %>
+                <div class="Card-E <%= e.status %>">
+                    <a href="/edit/<%= e.id %>">
+                        <img src="/img/icon_edit.png" class="edit_icon">
+                    </a>
+                    <a href="/<%= e.id %>" >
+                        <h3>
+                            <%= e.titulo %>
+                        </h3>
+                        <p><span class="subtitle">Inicio:</span>
+                            <%= e.dt_inicio %>
+                        </p>
+                        <p><span class="subtitle">Fim:</span>
+                            <%= e.dt_fim %>
+                        </p>
+                    </a>
+                </div>
+                    <% }) %>
+            </main>
+    </body>
 
 
-<%- include("partials/footer.ejs") %>
+    <%- include("partials/footer.ejs") %>

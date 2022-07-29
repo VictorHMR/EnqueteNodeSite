@@ -12,11 +12,11 @@ const Enquete = connection.define('enquete', {
         allowNull: false
     },
     dt_inicio:{
-        type: sequelize.DATE,
+        type: sequelize.DATEONLY,
         allowNull:false
     },
     dt_fim:{
-        type: sequelize.DATE,
+        type: sequelize.DATEONLY,
         allowNull:false
     }
 })

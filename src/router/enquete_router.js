@@ -7,11 +7,18 @@ router.get('/', controller.list_all)
 router.get('/cadastrar', (req, res)=>{
     res.render('cadastro')
 })
+router.get('/edit/:id', controller.EnqueteSelect)
 router.get('/:id', controller.EnqueteSelect)
 
 
 router.post('/cadastrar', controller.createEnquete)
-router.post('/createE', controller.createEnquete)
+
+// router.post('/edit', controller.updateEnquete)
+router.post('/edit/:id', (req, res)=>{
+    res.send(req.params.id)
+})
+
+
 
 router.delete('/deleteE', controller.deleteEnquete)
 
