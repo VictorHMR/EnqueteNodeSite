@@ -1,0 +1,27 @@
+<%- include("partials/head.ejs", {Screen: 'Votar' }); %>
+<body>
+    <%- include("partials/navbar.ejs") %>
+    <section class="form-body">
+        <h2><%= enquete.titulo %></h2>
+        <form action="/votar/<%= enquete.id %>" method="post">
+            <% if(enquete.status){ %>
+                <% respostas.forEach(e=>{ %>
+                    <label for="Resposta"> <%= e.titulo + ') '+ e.votos %> Votos </label> 
+                    <input type="radio" name="resposta" value="<%= e.id %>"><br>
+                <% }) %>
+            <button>Votar !</button>
+            <% } else{ %>
+                <% respostas.forEach(e=>{ %>
+                    <label for="Resposta"> <%= e.titulo + ') '+ e.votos %> Votos</label> 
+                    <input type="radio" name="resposta" value="<%= e.id %>" disabled><br>
+                <% }) %>
+            <button disabled>Votar !</button> 
+            <% } %>
+        </form>
+
+
+    </section>
+</body>
+
+
+<%- include("partials/footer.ejs") %>

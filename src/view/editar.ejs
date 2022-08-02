@@ -2,8 +2,8 @@
 
     <body>
         <%- include("partials/navbar.ejs") %>
-
-            <form class="form-body" action="/edit/<%= enquete.id %>" method="post">
+        <main class="form-body">
+            <form action="/edit/<%= enquete.id %>" method="post" autocomplete="off">
                 <h1>Editar</h1>
                 <section class="enquete-data">
                     <input type="hidden" name="id">
@@ -23,24 +23,29 @@
                         <input type="date" name="fim" value="<%= enquete.dt_fim %>" required> 
                     </div>
                 </section>
-
-                <section class="pergunta-data">
-                    <% respostas.forEach(resposta => { %>
-                    <div>
-                        <label for="resposta">Resposta </label>
-                        <br>
-                        <input type="text" name="resposta" required value="<%= resposta.titulo %>">
-                    </div>
-                    <% }) %>
-                </section>
-
                 <section class="button-box">
-                    <input type="submit" value="Cadastrar" class="btn">
+                    <input type="submit" value="Salvar" class="btn">
                 </section>
 
             </form>
 
+            <section class="pergunta-data">
+                <% respostas.forEach((resposta, i) => { %>
+                <form action="/edit/<%= enquete.id %>/<%= resposta.id %>" method="post" autocomplete="off">
+                    <label for="resposta">Resposta <%= i +1 %> </label>
+                    <br>
+                    <input type="text" name="resposta" required value="<%= resposta.titulo %>">
+                    <button> <img src="/img/icon_edit.png" width="10px"></button>
+                </form>
+                <% }) %>
+            </section>
 
+            <section class="enquete-data"> 
+                <form action="/deleteE" method="post">
+                    <button name="id" value="<%= enquete.id %>">Deletar</button>
+                </form>
+            </section>
+</main>
     </body>
 
 

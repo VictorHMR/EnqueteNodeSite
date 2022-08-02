@@ -11,6 +11,9 @@ const Resposta = connection.define('resposta', {
     titulo:{
         type: sequelize.STRING,
         allowNull: false
+    },
+    votos:{
+        type: sequelize.INTEGER,
     }
 })
 Enquete.Enquete.hasMany(Resposta)

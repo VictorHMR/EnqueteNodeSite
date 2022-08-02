@@ -12,32 +12,52 @@ async function createEnquete (req, res) {
     fim: req.body.fim
   })
     .then(id => {
-      Resposta.createResposta({ titulos: req.body.resposta, enqueteId: id })
+      Resposta.createR({ titulos: req.body.resposta, enqueteId: id })
     })
     .then(res.redirect('/'))
     .catch(erro => res.send(erro))
 }
-async function deleteEnquete (req, res) {
-  Enquete.deleteE(req.body.id).then(res.send('Deletado'))
+async function EnqueteSelect (req, res) {
+  if(req.params.id){
+    var Einfo = await Enquete.selectE(req.params.id)
+    Einfo != ''
+    ? res.render('votar', {enquete: Einfo, respostas: await Resposta.SelectR(Einfo.id)})
+    : res.send('Não existe')
+  }
+}
+async function EnqueteEdit (req, res) {
+  if(req.params.id){
+    var Einfo = await Enquete.selectE(req.params.id)
+    Einfo != ''
+    ? res.render('editar', {enquete: Einfo, respostas: await Resposta.SelectR(Einfo.id)})
+    : res.send('Não existe')
+  }
 }
 async function updateEnquete (req, res) {
-  Enquete.updateE({
-    id: req.body.id,
-    titulo: req.body.titulo,
-    inicio: req.body.inicio,
-    fim: req.body.fim
-  }).then(
-    res.redirect('/')
-    // Resposta.updateR({
-
-    // })
+  if(req.params.Rid){
+    Resposta.updateR({
+      id: req.params.Rid,
+      titulo: req.body.resposta,
+      Eid: req.params.id
+    }).then(res.redirect('/'))
+  }else{
+    Enquete.updateE({
+      id: req.params.id,
+      titulo: req.body.titulo,
+      inicio: req.body.inicio,
+      fim: req.body.fim
+    }).then(res.redirect('/'))
+  }
+  
+}
+async function deleteEnquete (req, res) {
+  Resposta.deleteAll(req.body.id).then(
+    Enquete.deleteE(req.body.id).then(res.redirect('/'))
   )
 }
-async function EnqueteSelect (req, res) {
-  var Einfo = await Enquete.selectE(req.params.id)
-  Einfo != ''
-    ? res.render('editar', {enquete: Einfo[0], respostas: await Resposta.SelectResp(Einfo[0].id)})
-    : res.send('Não existe')
+async function addVote(req, res){
+  Resposta.increaseVote(req.body.resposta, req.params.id)
+  res.redirect(`/enquete/${req.params.id}`)
 }
 
 export default {
@@ -45,5 +65,7 @@ export default {
   createEnquete,
   deleteEnquete,
   updateEnquete,
-  EnqueteSelect
+  EnqueteSelect,
+  EnqueteEdit,
+  addVote
 }
