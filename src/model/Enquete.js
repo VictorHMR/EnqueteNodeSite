@@ -29,7 +29,6 @@ async function selectE(p_id){
     }
   }).then(dados=>{
       var Now = new Date().toISOString()
-      console.log(Now)
       dados.dt_inicio <= Now && dados.dt_fim >= Now ? dados.status = true : dados.status = false      
     return dados
   })

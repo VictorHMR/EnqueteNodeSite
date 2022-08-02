@@ -1,0 +1,16 @@
+.form-body label {
+    color:#ffffff;
+    font-size: 17px;
+    font-weight: 500;
+}
+input {
+    font-size: 18px;
+    height: 34px;
+    padding-left: 10px;
+    padding-right: 10px;
+    color: #666;
+    border: 1px solid #d6d6d6;
+    border-radius: 4px;
+    background: white;
+    outline: none;
+  }
