@@ -20,6 +20,8 @@ async function createEnquete (req, res) {
 async function EnqueteSelect (req, res) {
   if(req.params.id){
     var Einfo = await Enquete.selectE(req.params.id)
+    Einfo.dt_inicio = Einfo.dt_inicio.split("-").reverse().join("/");
+    Einfo.dt_fim = Einfo.dt_fim.split("-").reverse().join("/") ;
     Einfo != ''
     ? res.render('votar', {enquete: Einfo, respostas: await Resposta.SelectR(Einfo.id)})
     : res.send('Não existe')

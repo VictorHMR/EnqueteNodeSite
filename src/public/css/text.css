@@ -1,12 +1,21 @@
+@import url('https://fonts.googleapis.com/css2?family=Rubik&display=swap');
+*{
+    font-family: 'Rubik', sans-serif;
+}
+
 .Card-E h3{
     padding: 5px 15px;
     margin: 0;
     font-size: 1.2rem;
 }
 .status{
+    width: 100%;
     padding: 2px;
     margin: 0;
     font-weight: 900;
+    text-align: center;
+    position: absolute;
+    bottom: 0;
 }
 .Card-E p{
     padding: 5px;

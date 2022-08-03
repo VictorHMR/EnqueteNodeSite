@@ -1,45 +1,64 @@
 <%- include("partials/head.ejs", {Screen: 'Votar' }); %>
-<body>
-    <%- include("partials/navbar.ejs") %>
+
+    <body>
+        <%- include("partials/navbar.ejs") %>
 
 
 
 
-    <section class="form-section">
-        <form action="/votar/<%= enquete.id %>" method="post" class="form-box"> 
-            <div class="form-header">
-                <h1><%= enquete.titulo %></h1>
-            </div>
-            <div class="form-body">
-                <% if(enquete.status){ %>
-                    <div class="radio-box">
-                    <% respostas.forEach(e=>{ %>
-                        
-                            <input type="radio" name="resposta" value="<%= e.id %>" id="<%= e.id %>" required>
-                            <label for="<%= e.id %>"> <%= e.titulo + ' | '+ e.votos %> Votos </label> 
-                        
-                    <% }) %>
+            <section class="form-section">
+                <form action="/votar/<%= enquete.id %>" method="post" class="form-box">
+                    <div class="form-header">
+                        <h1>
+                            <%= enquete.titulo %>
+                        </h1>
                     </div>
-                <br>
-                <button>Confirmar</button>
-                <% } else{ %>
-                    <div class="radio-box">
-                        <% respostas.forEach(e=>{ %>
-                            
-                                <input type="radio" name="resposta" value="<%= e.id %>" id="<%= e.id %>" disabled>
-                                <label for="<%= e.id %>"> <%= e.titulo + ' | '+ e.votos %> Votos </label> 
-                            
-                        <% }) %>
-                        </div>
-                <button disabled>Confirmar</button> 
-                <% } %>
-            </div>
-        </form>
-    </section>
+                    <div class="form-body">
+                        <% if(enquete.status){ %>
+                            <div class="radio-box">
+                                <% respostas.forEach(e=>{ %>
+
+                                    <input type="radio" name="resposta" value="<%= e.id %>" id="<%= e.id %>" required>
+                                    <label for="<%= e.id %>">
+                                        <%= e.titulo %>
+
+                                        <span>Votos: <%= e.votos %> </span>
+                                    </label>
+
+                                    <% }) %>
+                                    <div class="button-box">
+                                        <button class="btn btnPurple">Confirmar</button>
+                                    </div>
+                            </div>
+                            <br>
+                            <% } else{ %>
+                                <div class="radio-box">
+                                    <% respostas.forEach(e=>{ %>
+
+                                        <input type="radio" name="resposta" value="<%= e.id %>" id="<%= e.id %>"
+                                            disabled>
+                                        <label for="<%= e.id %>">
+                                            <%= e.titulo + ' | ' + e.votos %> Votos
+                                        </label>
+
+                                        <% }) %>
+                                        <div class="button-box">
+                                            <button class="btn btnPurple" disabled>Confirmar</button>
+                                        </div>
+                                </div>
+                                
+                                <% } %>
+                                <div>
+                                    <p><b>Inicio em:</b> <%= enquete.dt_inicio %></p>
+                                    <p><b>Finaliza em:</b> <%= enquete.dt_fim %></p>
+                                </div>
+                    </div>
+                </form>
+            </section>
 
 
 
-</body>
+    </body>
 
 
-<%- include("partials/footer.ejs") %>
+    <%- include("partials/footer.ejs") %>
