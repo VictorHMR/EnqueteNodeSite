@@ -15,23 +15,23 @@
                     <div class="radio-box">
                     <% respostas.forEach(e=>{ %>
                         
-                            <input type="radio" name="resposta" value="<%= e.id %>" id="<%= e.id %>">
-                            <label for="<%= e.id %>"> <%= e.titulo + ') '+ e.votos %> Votos </label> 
+                            <input type="radio" name="resposta" value="<%= e.id %>" id="<%= e.id %>" required>
+                            <label for="<%= e.id %>"> <%= e.titulo + ' | '+ e.votos %> Votos </label> 
                         
                     <% }) %>
                     </div>
                 <br>
-                <button>Votar !</button>
+                <button>Confirmar</button>
                 <% } else{ %>
                     <div class="radio-box">
                         <% respostas.forEach(e=>{ %>
                             
                                 <input type="radio" name="resposta" value="<%= e.id %>" id="<%= e.id %>" disabled>
-                                <label for="<%= e.id %>"> <%= e.titulo + ') '+ e.votos %> Votos </label> 
+                                <label for="<%= e.id %>"> <%= e.titulo + ' | '+ e.votos %> Votos </label> 
                             
                         <% }) %>
                         </div>
-                <button disabled>Votar !</button> 
+                <button disabled>Confirmar</button> 
                 <% } %>
             </div>
         </form>
