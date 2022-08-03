@@ -8,11 +8,11 @@ async function get_all () {
     dados.map(dado => {
       var Now = new Date().toISOString()
       if(Now <= dado.dt_inicio){
-        dado.status = 'Status_NI'
+        dado.status = {class:'Status_NI', text: "Não Iniciado"}
       }else if(Now > dado.dt_fim){
-        dado.status = 'Status_F'
+        dado.status = {class:'Status_F', text: "Finalizado"}
       }else{
-        dado.status = 'Status_EA'
+        dado.status = {class:'Status_EA', text:"Em Andamento"}
       }
       dado.dt_inicio = dado.dt_inicio.split("-").reverse().join("/");
       dado.dt_fim = dado.dt_fim.split("-").reverse().join("/")  

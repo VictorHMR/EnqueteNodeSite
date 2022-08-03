@@ -10,17 +10,25 @@ body {
   width: 90%;
 }
 .Card-E {
-  width: 22.5%;
+  width: 100%;
+  max-width: 250px;
   margin: 10px 10px;
   text-align: center;
+  border-radius: 8px;
   transform: scale(1);
   transition: transform 0.5s;
 }
 .Card-E:hover {
   transform: scale(0.95);
 }
+.card-header{
+  border-bottom: 1px solid #cccccc;
+  background-color: #1b1b1b;
+  border-radius: 8px 8px 0 0;
+}
+
 .Status_NI {
-  background-color: rgb(7, 0, 49);
+  background-color: rgb(23, 17, 53);
 }
 .Status_F {
   background-color: rgb(49, 0, 0);
@@ -66,34 +74,24 @@ body {
   font-size: 17px;
   font-weight: 500;
 }
-
-.enquete-data {
-  width: 100%;
-  margin: 0 auto;
-  background-color: rgba(0, 0, 0, 0.349);
-  display: flex;
-  justify-content: space-evenly;
-  flex-flow: wrap;
-}
-.pergunta-data {
-  width: 50%;
-  margin: 10px auto;
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
-}
-
-.pergunta-data input {
-  width: 80%;
-}
-
 .button-box {
   width: 50%;
   margin: 10px auto;
 }
-
+.center-form{
+  width: 50%;
+  margin: 0 auto;
+}
 @media only screen and (max-width: 500px) {
   .form-row {
     flex-direction: column;
+  }
+  .Card-Box{
+    flex-direction: column;
+    margin: 0 auto;
+  }
+  .Card-E {
+    width: 100%;
+    max-width: 100vw;
   }
 }

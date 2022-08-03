@@ -39,14 +39,14 @@ async function updateEnquete (req, res) {
       id: req.params.Rid,
       titulo: req.body.resposta,
       Eid: req.params.id
-    }).then(res.redirect('/'))
+    }).then(res.redirect(`/edit/${req.params.id}`))
   }else{
     Enquete.updateE({
       id: req.params.id,
       titulo: req.body.titulo,
       inicio: req.body.inicio,
       fim: req.body.fim
-    }).then(res.redirect('/'))
+    }).then(res.redirect(`/edit/${req.params.id}`))
   }
   
 }

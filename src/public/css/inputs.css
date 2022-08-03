@@ -6,6 +6,7 @@
 input {
     font-size: 18px;
     height: 34px;
+    width: 80;
     padding-left: 10px;
     padding-right: 10px;
     color: #666;
@@ -13,4 +14,41 @@ input {
     border-radius: 4px;
     background: white;
     outline: none;
-  }
+}
+
+input[type="radio"]{
+    display: none;
+    position: absolute;
+}
+input[type="radio"]:checked + label{
+background-color: white;
+color: #666;
+}
+input[type="radio"]:checked + label:before{
+    
+    height: 10px;
+    width: 10px;
+    border: 6px solid #666;
+}
+.radio-box{
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 0;
+}
+.radio-box label{
+position: relative;
+border: 2px solid white;
+padding:  10px 5px;
+border-radius: 5px;
+display: flex;
+align-items: center;
+font-weight: bold;
+}
+.radio-box label:before{
+    content: "";
+    height: 15px;
+    width: 15px;
+    border: 3px solid white;
+    border-radius: 50%;
+    margin-right: 10px;
+    }

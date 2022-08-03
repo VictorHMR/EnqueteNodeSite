@@ -1,26 +1,44 @@
 <%- include("partials/head.ejs", {Screen: 'Votar' }); %>
 <body>
     <%- include("partials/navbar.ejs") %>
-    <section class="form-body">
-        <h2><%= enquete.titulo %></h2>
-        <form action="/votar/<%= enquete.id %>" method="post">
-            <% if(enquete.status){ %>
-                <% respostas.forEach(e=>{ %>
-                    <label for="Resposta"> <%= e.titulo + ') '+ e.votos %> Votos </label> 
-                    <input type="radio" name="resposta" value="<%= e.id %>"><br>
-                <% }) %>
-            <button>Votar !</button>
-            <% } else{ %>
-                <% respostas.forEach(e=>{ %>
-                    <label for="Resposta"> <%= e.titulo + ') '+ e.votos %> Votos</label> 
-                    <input type="radio" name="resposta" value="<%= e.id %>" disabled><br>
-                <% }) %>
-            <button disabled>Votar !</button> 
-            <% } %>
+
+
+
+
+    <section class="form-section">
+        <form action="/votar/<%= enquete.id %>" method="post" class="form-box"> 
+            <div class="form-header">
+                <h1><%= enquete.titulo %></h1>
+            </div>
+            <div class="form-body">
+                <% if(enquete.status){ %>
+                    <div class="radio-box">
+                    <% respostas.forEach(e=>{ %>
+                        
+                            <input type="radio" name="resposta" value="<%= e.id %>" id="<%= e.id %>">
+                            <label for="<%= e.id %>"> <%= e.titulo + ') '+ e.votos %> Votos </label> 
+                        
+                    <% }) %>
+                    </div>
+                <br>
+                <button>Votar !</button>
+                <% } else{ %>
+                    <div class="radio-box">
+                        <% respostas.forEach(e=>{ %>
+                            
+                                <input type="radio" name="resposta" value="<%= e.id %>" id="<%= e.id %>" disabled>
+                                <label for="<%= e.id %>"> <%= e.titulo + ') '+ e.votos %> Votos </label> 
+                            
+                        <% }) %>
+                        </div>
+                <button disabled>Votar !</button> 
+                <% } %>
+            </div>
         </form>
-
-
     </section>
+
+
+
 </body>
 
 

@@ -1,52 +1,73 @@
-<%- include("partials/head.ejs", {Screen: 'Cadastrar' }); %>
+<%- include("partials/head.ejs", {Screen: 'Editar' }); %>
 
-    <body>
-        <%- include("partials/navbar.ejs") %>
-        <main class="form-body">
+<body>
+    <%- include("partials/navbar.ejs") %>
+
+
+
+
+
+    <section class="form-section">
+        <section class="form-box">
             <form action="/edit/<%= enquete.id %>" method="post" autocomplete="off">
-                <h1>Editar</h1>
-                <section class="enquete-data">
-                    <input type="hidden" name="id">
-                    <div>
-                        <label for="title">Titulo</label>
-                        <br>
-                        <input type="text" name="titulo" value="<%= enquete.titulo %>" required>
+                <div class="form-header">
+                    <h1>Editar Enquete</h1>
+                </div>
+                <div class="form-body">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label for="title">Titulo</label>
+                            <input type="text" name="titulo" class="input-titulo" required
+                                value="<%= enquete.titulo %>">
+                        </div>
                     </div>
-                    <div>
-                        <label for="inicio">Data Inicial</label>
-                        <br>
-                        <input type="date" name="inicio" value="<%= enquete.dt_inicio %>" required>
+                    <section class="form-row">
+                        <div class="input-group">
+                            <label for="inicio">Data Inicial</label>
+                            <input type="date" name="inicio" required value="<%= enquete.dt_inicio %>">
+                        </div>
+                        <div class="input-group">
+                            <label for="fim">Data Final</label>
+                            <input type="date" name="fim" required value="<%= enquete.dt_fim %>">
+                        </div>
+
+                    </section>
+                    <div class="button-box">
+                        <input type="submit" value="Salvar" class="btn">
                     </div>
-                    <div>
-                        <label for="fim">Data Final</label>
-                        <br>
-                        <input type="date" name="fim" value="<%= enquete.dt_fim %>" required> 
-                    </div>
-                </section>
-                <section class="button-box">
-                    <input type="submit" value="Salvar" class="btn">
-                </section>
+                </div>
 
             </form>
 
-            <section class="pergunta-data">
-                <% respostas.forEach((resposta, i) => { %>
-                <form action="/edit/<%= enquete.id %>/<%= resposta.id %>" method="post" autocomplete="off">
-                    <label for="resposta">Resposta <%= i +1 %> </label>
-                    <br>
-                    <input type="text" name="resposta" required value="<%= resposta.titulo %>">
-                    <button> <img src="/img/icon_edit.png" width="10px"></button>
-                </form>
-                <% }) %>
-            </section>
+            <div class="form-header">
+                <h1>Editar
+                    respostas
+                </h1>
+            </div>
+            <div class="form-body">
+                <div class="center-form">
+                    <% respostas.forEach((resposta, i) => { %>
+                        <form action="/edit/<%= enquete.id %>/<%= resposta.id %>" method="post" autocomplete="off">
+                            <div class="input-group">
+                                <label for="resposta">Resposta <%= i +1 %> </label>
+                                <div class="form-row">
+                                    <input type="text" name="resposta" required value="<%= resposta.titulo %>">
+                                    <button class="save_icon"> <img src="/img/icon_save.png" width="10px" ></button>
+                                </div>
+                            </div>
+                        </form>
+                        <% }) %>
+                </div>
+                
+            </div>
+            <form action="/deleteE" method="post" class="button-box">
+                <button name="id" value="<%= enquete.id %>" class="btn">Deletar Enquete</button>
+            </form>
+        </section>
 
-            <section class="enquete-data"> 
-                <form action="/deleteE" method="post">
-                    <button name="id" value="<%= enquete.id %>">Deletar</button>
-                </form>
-            </section>
-</main>
-    </body>
+    </section>
+
+</body>
 
 
-    <%- include("partials/footer.ejs") %>
+<%- include("partials/footer.ejs") %>
