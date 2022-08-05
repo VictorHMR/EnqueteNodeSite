@@ -2,19 +2,21 @@
 *{
     font-family: 'Rubik', sans-serif;
 }
-
-.Card-E h3{
+.low-text{
+    padding-left: 50px;
+}
+.text-title{
     padding: 5px 15px;
-    margin: 0;
+    margin: 0 auto;
     font-size: 1.2rem;
 }
 .status{
     width: 100%;
     padding: 2px;
-    margin: 0;
+    margin: 10px;
     font-weight: 900;
     text-align: center;
-    position: absolute;
+    position: relative;
     bottom: 0;
 }
 .Card-E p{

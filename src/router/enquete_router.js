@@ -7,7 +7,7 @@ router.get('/', enqueteController.list_all)
 router.get('/cadastrar', (req, res) => {
   res.render('cadastro')
 })
-router.get('/edit/:id', enqueteController.EnqueteEdit)
+router.get('/edit/:id', enqueteController.EditionPopulate)
 router.get('/enquete/:id', enqueteController.EnqueteSelect)
 
 router.post('/cadastrar', enqueteController.createEnquete)

@@ -1,28 +1,25 @@
-//import {connection} from "../data/database.js";
-import Enquete from '../data/enquetes.js'
-import Resposta from './Resposta.js'
-//connection.authenticate( ).then(( )=>{console.log("Conectado !")})
+import EnqueteDB from '../data/enquetes.js'
 
-async function get_all () {
-   return await Enquete.Enquete.findAll({raw: true, order:[['id', 'DESC']]}).then(dados=>{
-    dados.map(dado => {
-      var Now = new Date().toISOString()
-      if(Now <= dado.dt_inicio){
-        dado.status = {class:'Status_NI', text: "Não Iniciado"}
-      }else if(Now > dado.dt_fim){
-        dado.status = {class:'Status_F', text: "Finalizado"}
+async function selectAll () {
+   return await EnqueteDB.Enquete.findAll({raw: true, order:[['id', 'DESC']]}).then(results =>{
+    results.map(dados => {
+      var dataNow = new Date().toISOString()
+      if(dataNow <= dados.dt_inicio){
+        dados.status = {class:'Status_NI', text: "Não Iniciado"}
+      }else if(dataNow > dados.dt_fim){
+        dados.status = {class:'Status_F', text: "Finalizado"}
       }else{
-        dado.status = {class:'Status_EA', text:"Em Andamento"}
+        dados.status = {class:'Status_EA', text:"Em Andamento"}
       }
-      dado.dt_inicio = dado.dt_inicio.split("-").reverse().join("/");
-      dado.dt_fim = dado.dt_fim.split("-").reverse().join("/")  
+      dados.dt_inicio = dados.dt_inicio.split("-").reverse().join("/");
+      dados.dt_fim = dados.dt_fim.split("-").reverse().join("/")  
       
     })
-    return dados
+    return results
   })
 }
-async function selectE(p_id){
-  return await Enquete.Enquete.findOne({
+async function selectOne(p_id){
+  return await EnqueteDB.Enquete.findOne({
     raw: true,
     where: {
       id: p_id
@@ -35,7 +32,7 @@ async function selectE(p_id){
   
 }
 async function create (p_enquete) {
-  return await Enquete.Enquete.create({
+  return await EnqueteDB.Enquete.create({
     titulo: p_enquete.titulo,
     descricao: p_enquete.descricao,
     dt_inicio: p_enquete.inicio,
@@ -43,14 +40,14 @@ async function create (p_enquete) {
   }).then(result =>{ return result.id})
 }
 async function deleteE (p_id) {
-  Enquete.Enquete.destroy({
+  EnqueteDB.Enquete.destroy({
     where: {
       id: p_id
     }
   })
 }
 async function updateE (p_enquete) {
-  Enquete.Enquete.update(
+  EnqueteDB.Enquete.update(
     {
       titulo: p_enquete.titulo,
       descricao: p_enquete.descricao,
@@ -66,9 +63,9 @@ async function updateE (p_enquete) {
 }
 
 export default {
-  get_all,
+  selectAll,
   create,
   deleteE,
   updateE,
-  selectE
+  selectOne
 }

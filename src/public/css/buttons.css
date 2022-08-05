@@ -41,15 +41,16 @@
   }
   
   .btnPurple {
-    color: blueviolet;
-    border-color: blueviolet;
+    color: rgb(229, 145, 255);
+    border-color: rgb(146, 0, 190);
     -webkit-transition: box-shadow 150ms ease-in-out, color 300ms ease-in-out;
     transition: box-shadow 150ms ease-in-out, color 300ms ease-in-out;
   }
   .btnPurple:hover {
     color: #fff;
-    box-shadow: 0 0 10px 4px blueviolet;
-    background-color: blueviolet;
+    border-color: rgb(146, 0, 190);
+    box-shadow: 0 0 10px 4px rgb(146, 0, 190);
+    background-color: rgb(146, 0, 190);
   }
   .btnRed {
     color: rgb(255, 0, 0);

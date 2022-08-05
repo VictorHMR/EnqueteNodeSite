@@ -1,8 +1,8 @@
 import Enquete from '../model/Enquete.js'
-import Resposta from '../model/Resposta.js'
+import ControllerResposta from '../controller/resposta.js'
 
 async function list_all (req, res) {
-  var data = await Enquete.get_all()
+  var data = await Enquete.selectAll()
   res.render('index', { enquetes: data })
 }
 async function createEnquete (req, res) {
@@ -11,55 +11,52 @@ async function createEnquete (req, res) {
     inicio: req.body.inicio,
     fim: req.body.fim
   })
-    .then(id => {
-      Resposta.createR({ titulos: req.body.resposta, enqueteId: id })
+    .then(enquete_id => {
+      ControllerResposta.createResposta(req, res, enquete_id)
     })
     .then(res.redirect('/'))
     .catch(erro => res.send(erro))
 }
 async function EnqueteSelect (req, res) {
   if(req.params.id){
-    var Einfo = await Enquete.selectE(req.params.id)
-    Einfo.dt_inicio = Einfo.dt_inicio.split("-").reverse().join("/");
-    Einfo.dt_fim = Einfo.dt_fim.split("-").reverse().join("/") ;
-    Einfo != ''
-    ? res.render('votar', {enquete: Einfo, respostas: await Resposta.SelectR(Einfo.id)})
+    var EnqInfo = await Enquete.selectOne(req.params.id)
+    EnqInfo.dt_inicio = EnqInfo.dt_inicio.split("-").reverse().join("/");
+    EnqInfo.dt_fim = EnqInfo.dt_fim.split("-").reverse().join("/") ;
+    EnqInfo != ''
+    ? res.render('votar', {enquete: EnqInfo, respostas: await ControllerResposta.readResposta(req, res, EnqInfo.id)})
     : res.send('Não existe')
   }
 }
-async function EnqueteEdit (req, res) {
+async function EditionPopulate (req, res) {
   if(req.params.id){
-    var Einfo = await Enquete.selectE(req.params.id)
-    Einfo != ''
-    ? res.render('editar', {enquete: Einfo, respostas: await Resposta.SelectR(Einfo.id)})
+    var EnqInfo = await Enquete.selectOne(req.params.id)
+    EnqInfo != ''
+    ? res.render('editar', {enquete: EnqInfo, respostas: await ControllerResposta.readResposta(req, res, EnqInfo.id)})
     : res.send('Não existe')
   }
 }
 async function updateEnquete (req, res) {
   if(req.params.Rid){
-    Resposta.updateR({
-      id: req.params.Rid,
-      titulo: req.body.resposta,
-      Eid: req.params.id
-    }).then(res.redirect(`/edit/${req.params.id}`))
+    ControllerResposta.updateResposta(req, res)
   }else{
     Enquete.updateE({
       id: req.params.id,
       titulo: req.body.titulo,
       inicio: req.body.inicio,
       fim: req.body.fim
-    }).then(res.redirect(`/edit/${req.params.id}`))
+    })
   }
-  
+  res.redirect(`/`)
 }
+//parei aqui
 async function deleteEnquete (req, res) {
-  Resposta.deleteAll(req.body.id).then(
+  ControllerResposta.deleteAllResposta(req).then(
     Enquete.deleteE(req.body.id).then(res.redirect('/'))
   )
 }
 async function addVote(req, res){
-  Resposta.increaseVote(req.body.resposta, req.params.id)
-  res.redirect(`/enquete/${req.params.id}`)
+  ControllerResposta.voteResposta(req, res).then(res.redirect(`/enquete/${req.params.id}`))
+  
 }
 
 export default {
@@ -68,6 +65,6 @@ export default {
   deleteEnquete,
   updateEnquete,
   EnqueteSelect,
-  EnqueteEdit,
+  EditionPopulate,
   addVote
 }

@@ -1,39 +1,42 @@
 <%- include("partials/head.ejs", {Screen: 'Enquetes' }); %>
 
-<body>
-    <%- include("partials/navbar.ejs") %>
+    <body>
+        <%- include("partials/navbar.ejs") %>
 
-    <main class="Card-Box">
-        <% enquetes.forEach(e=> { %>
-            <a href="/enquete/<%= e.id %>">
-        <div class="Card-E <%= e.status.class %>">
-            <form action="/edit/<%= e.id %>" class="edit_icon">
-               <button>
-                <img src="/img/icon_edit.png">
-                </button>
-            </form>
-                <div class="card-header">
-                    <p>
-                        <b>Inicio:</b>
-                        <%= e.dt_inicio %>
-                        <br>
-                        <b>Fim:</b>
-                        <%= e.dt_fim %>
-                    </p>
-                </div>
-                <div>
-                    <h3>
-                        <%= e.titulo %>
-                    </h3>
-                    <p class="status">
-                        <%= e.status.text %>
-                    </p>
-                </div>    
-        </div>
-    </a>
-        <% }) %>
-    </main>
-</body>
+        <div class="low-text">Total de Registros: <%= enquetes.length %></div>
+            <main class="Card-Box">
+                <% enquetes.forEach(e=> { %>
+                    <a href="/enquete/<%= e.id %>">
+                        <div class="Card-E <%= e.status.class %>">
+                            <form action="/edit/<%= e.id %>" class="edit_icon">
+                                <button>
+                                    <img src="/img/icon_edit.png">
+                                </button>
+                            </form>
+                            <div class="card-header">
+                                <p>
+                                    <b>Inicio:</b>
+                                    <%= e.dt_inicio %>
+                                        <br>
+                                        <b>Fim:</b>
+                                        <%= e.dt_fim %>
+                                        <br>
+                                        <span class="status">
+                                           | <%= e.status.text %> |
+                                        </span> 
+                                </p>
+                            </div>
+                            <div class="card-body">
+                                <span class="text-title">
+                                    <%= e.titulo %>
+                                </span>
+                            </div>
+                        </div>
+                    </a>
+                    <% }) %>
+
+            </main>
+    </body>
 
 
-<%- include("partials/footer.ejs") %>
+    <%- include("partials/footer.ejs") %>

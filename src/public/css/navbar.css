@@ -23,7 +23,7 @@ a {
     display: flex;
     justify-content: space-around;
     align-items: center;
-    background: blueviolet;
+    background: rgb(37, 0, 48);
     box-shadow: 0 0 1em black;
     height: 8vh;
 

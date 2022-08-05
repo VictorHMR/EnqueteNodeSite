@@ -1,26 +1,24 @@
-import Resposta from '../data/respostas.js'
+import RespostaDB from '../data/respostas.js'
 
 async function SelectR (p_id) {
-  return Resposta.Resposta.findAll({
+  return RespostaDB.Resposta.findAll({
     where: {
       enqueteId: p_id
     }
   })
 }
-
 async function createR (p_res) {
   p_res.titulos.forEach(titulo => {
     if (titulo != '') {
-      Resposta.Resposta.create({
+      RespostaDB.Resposta.create({
         titulo: titulo,
         enqueteId: p_res.enqueteId
       })
     }
   })
 }
-
 async function updateR (p_resposta) {
-  Resposta.Resposta.update(
+  RespostaDB.Resposta.update(
     {
       titulo: p_resposta.titulo
     },
@@ -33,20 +31,20 @@ async function updateR (p_resposta) {
   )
 }
 async function deleteAll (p_Eid) {
-  Resposta.Resposta.destroy({
+  RespostaDB.Resposta.destroy({
     where: {
       enqueteId: p_Eid
     }
   })
 }
 async function increaseVote (p_idR, p_idE) {
-  await Resposta.Resposta.findOne({
+  await RespostaDB.Resposta.findOne({
     raw: true,
     where: {
       id: p_idR
     }
   }).then(result => {
-    Resposta.Resposta.update(
+    RespostaDB.Resposta.update(
       {
         votos: result.votos + 1
       },
