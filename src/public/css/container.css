@@ -11,6 +11,7 @@ body {
   width: fit-content;
 }
 .Card-E {
+  height: 100%;
   min-height: 25vh;
   min-width: 300px;
   margin: 10px 10px;
